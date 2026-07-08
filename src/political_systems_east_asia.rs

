@@ -1,0 +1,143 @@
+// political_systems_east_asia.rs
+// Chương trình Rust mô tả hệ thống chính trị của các nước Á Đông (East Asia)
+
+use std::collections::HashMap;
+
+#[derive(Debug, Clone)]
+struct PoliticalSystem {
+    country: String,
+    system_type: String,        // Cộng hòa, Quân chủ lập hiến, Cộng hòa xã hội chủ nghĩa, v.v.
+    head_of_state: String,
+    head_of_government: String,
+    ruling_party: String,
+    description: String,
+    multi_party: bool,
+}
+
+impl PoliticalSystem {
+    fn new(
+        country: &str,
+        system_type: &str,
+        head_of_state: &str,
+        head_of_government: &str,
+        ruling_party: &str,
+        description: &str,
+        multi_party: bool,
+    ) -> Self {
+        PoliticalSystem {
+            country: country.to_string(),
+            system_type: system_type.to_string(),
+            head_of_state: head_of_state.to_string(),
+            head_of_government: head_of_government.to_string(),
+            ruling_party: ruling_party.to_string(),
+            description: description.to_string(),
+            multi_party,
+        }
+    }
+
+    fn print(&self) {
+        println!("=== {} ===", self.country);
+        println!("Hệ thống: {}", self.system_type);
+        println!("Nguyên thủ quốc gia: {}", self.head_of_state);
+        println!("Người đứng đầu chính phủ: {}", self.head_of_government);
+        println!("Đảng cầm quyền: {}", self.ruling_party);
+        println!("Đa đảng: {}", if self.multi_party { "Có" } else { "Không" });
+        println!("Mô tả: {}\n", self.description);
+    }
+}
+
+fn main() {
+    let mut systems: HashMap<String, PoliticalSystem> = HashMap::new();
+
+    // Trung Quốc
+    systems.insert(
+        "China".to_string(),
+        PoliticalSystem::new(
+            "Cộng hòa Nhân dân Trung Hoa",
+            "Cộng hòa Xã hội Chủ nghĩa (một đảng)",
+            "Chủ tịch nước (Tập Cận Bình)",
+            "Thủ tướng Quốc vụ viện",
+            "Đảng Cộng sản Trung Quốc",
+            "Hệ thống Leninist một đảng lãnh đạo. Quốc hội Nhân dân Toàn quốc là cơ quan lập pháp cao nhất nhưng thực tế quyền lực tập trung vào Bộ Chính trị và Tổng Bí thư.",
+            false,
+        ),
+    );
+
+    // Nhật Bản
+    systems.insert(
+        "Japan".to_string(),
+        PoliticalSystem::new(
+            "Nhật Bản",
+            "Quân chủ lập hiến + Nghị viện",
+            "Thiên hoàng (Naruhito)",
+            "Thủ tướng",
+            "Đảng Dân chủ Tự do (LDP)",
+            "Nền dân chủ nghị viện hiện đại. Thiên hoàng chỉ mang tính biểu tượng. Quyền lực thực nằm ở Thủ tướng và Quốc hội (Diet).",
+            true,
+        ),
+    );
+
+    // Hàn Quốc
+    systems.insert(
+        "South Korea".to_string(),
+        PoliticalSystem::new(
+            "Hàn Quốc (Đại Hàn Dân Quốc)",
+            "Cộng hòa Tổng thống",
+            "Tổng thống",
+            "Tổng thống (kiêm luôn)",
+            "Đảng Dân chủ hoặc Đảng Quyền lực Nhân dân (luân phiên)",
+            "Dân chủ tổng thống chế. Tổng thống nắm quyền hành pháp mạnh, được bầu trực tiếp. Có đa đảng và chuyển giao quyền lực dân chủ.",
+            true,
+        ),
+    );
+
+    // Triều Tiên
+    systems.insert(
+        "North Korea".to_string(),
+        PoliticalSystem::new(
+            "Cộng hòa Dân chủ Nhân dân Triều Tiên",
+            "Chủ nghĩa xã hội Juche (một đảng)",
+            "Chủ tịch Ủy ban Quốc vụ (Kim Jong-un)",
+            "Kim Jong-un",
+            "Đảng Lao động Triều Tiên",
+            "Chế độ độc tài gia trưởng cộng sản. Quyền lực tuyệt đối thuộc về nhà lãnh đạo tối cao và gia tộc Kim.",
+            false,
+        ),
+    );
+
+    // Đài Loan
+    systems.insert(
+        "Taiwan".to_string(),
+        PoliticalSystem::new(
+            "Đài Loan (Trung Hoa Dân Quốc)",
+            "Cộng hòa bán tổng thống",
+            "Tổng thống",
+            "Tổng thống",
+            "Đảng Dân Tiến (DPP) hoặc Quốc Dân Đảng (KMT)",
+            "Dân chủ đa đảng đầy đủ. Có bầu cử tự do, tự do ngôn luận cao. Căng thẳng quan hệ với Trung Quốc.",
+            true,
+        ),
+    );
+
+    // Mông Cổ
+    systems.insert(
+        "Mongolia".to_string(),
+        PoliticalSystem::new(
+            "Mông Cổ",
+            "Cộng hòa nghị viện",
+            "Tổng thống",
+            "Thủ tướng",
+            "Đảng Nhân dân Mông Cổ hoặc Đảng Dân chủ",
+            "Dân chủ nghị viện chuyển tiếp từ chủ nghĩa xã hội. Đa đảng và bầu cử tự do.",
+            true,
+        ),
+    );
+
+    println!("HỆ THỐNG CHÍNH TRỊ CÁC NƯỚC Á ĐÔNG\n");
+    for system in systems.values() {
+        system.print();
+    }
+
+    // Thêm menu tương tác đơn giản
+    println!("Chương trình đã hiển thị thông tin. Bạn có thể mở rộng HashMap này để thêm dữ liệu.");
+}
